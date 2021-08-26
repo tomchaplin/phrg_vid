@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := low
 
-SCENE = OmegaDef
+SCENE = IntroScene
 
 low:
 	manim -pql scene.py $(SCENE)
