@@ -71,8 +71,9 @@ def getLongSquareSolution():
 def getSquareGraph(directed=True, H0=2.5, W0=3.5):
     H = [2, 2, 0, 0]
     W = [0, 2, 2, 0]
+    labels = ["a", "b", "c", "d"]
     V = [
-        LabeledDot(f"v_{i}").shift(H0 * DOWN + W0 * RIGHT + H[i] * UP + W[i] * RIGHT)
+        LabeledDot(labels[i]).shift(H0 * DOWN + W0 * RIGHT + H[i] * UP + W[i] * RIGHT)
         for i in range(4)
     ]
     A = [
@@ -225,7 +226,7 @@ class GroupDef(Scene):
             .align_to(elem_path, LEFT)
         )
         not_allowed_eg = (
-            Tex(r"$v_0 v_1 v_3 v_2$\\", r"is ", r"not", r" allowed")
+            Tex(r"$abdc$\\", r"is ", r"not", r" allowed")
             .set_color_by_tex("not", RED)
             .next_to(allowed_path, DOWN)
             .align_to(allowed_path, LEFT)
@@ -273,6 +274,7 @@ class OmegaDef(Scene):
         lambdas = [f"\\Lambda_{i}" for i in range(CD_LEN)]
         As = [f"\\mathcal{{A}}_{i}" for i in range(CD_LEN)]
         Omegas = [f"\\Omega_{i}" for i in range(CD_LEN)]
+        Homs = [f"H^{{\Xi}}_{i}" for i in range(CD_LEN)]
         boundaries = [
             f"\\xrightarrow{{\\quad\\partial_{i+1}\\quad}}" for i in range(CD_LEN - 1)
         ]
@@ -296,6 +298,12 @@ class OmegaDef(Scene):
             .set_color_by_tex("xrightarrow", GREEN)
             .next_to(hooks[0], UP)
             .align_to(lambda_complex, LEFT)
+        )
+        Omegas_complex_centred = chainComplexFactory(Omegas, boundaries).align_to(
+            lambda_complex, LEFT
+        )
+        Hom_complex = chainComplexFactory(Homs, boundaries).align_to(
+            lambda_complex, LEFT
         )
 
         a2box = SurroundingRectangle(As_complex[2], buff=0.1)
@@ -344,13 +352,12 @@ class OmegaDef(Scene):
         self.wait(5)
         self.play(Transform(As_complex, Omegas_complex_R))
         self.wait(2)
-        self.play(Transform(a2box, o1goodbox))
-        self.wait()
         self.play(
             *[
                 Transform(As_complex[2 * i + 1], Omegas_complex_G[2 * i + 1])
                 for i in range(CD_LEN - 1)
-            ]
+            ],
+            Transform(a2box, o1goodbox),
         )
         self.wait(5)
         self.play(Uncreate(Omega_def))
@@ -362,3 +369,26 @@ class OmegaDef(Scene):
         self.wait(2)
         self.play(Transform(ls_problem, ls_sol))
         self.wait(5)
+        # Centre Omega and delete everything else
+        self.play(
+            *[FadeOut(i) for i in ls_group + hooks],
+            FadeOut(ls_problem),
+            FadeOut(lambda_complex),
+            FadeOut(a2box),
+        )
+        self.play(
+            *[
+                Transform(As_complex[2 * i + 1], Omegas_complex_centred[2 * i + 1])
+                for i in range(CD_LEN - 1)
+            ]
+            + [
+                ApplyMethod(As_complex[2 * i].match_y, Omegas_complex_centred[2 * i])
+                for i in range(CD_LEN)
+            ]
+        )
+        self.wait(1)
+        self.play(
+            *[Uncreate(As_complex[2 * i + 1]) for i in range(CD_LEN - 1)]
+            + [Transform(As_complex[2 * i], Hom_complex[2 * i]) for i in range(CD_LEN)]
+        )
+        self.wait(1)
