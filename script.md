@@ -52,6 +52,10 @@ However, we do have good descriptions of the bottom three chain groups.
 Our aim is to understand how path homology Betti 1 usually behaves subject to a simple, Erdos-Renyi null model `G(n, p)`
 in which the number of nodes is fixed at `n` and each directed edge appears independently with probability `p`.
 Our first question is when should we expect Betti 1 to be zero, and when should we expect it to be non-zero?
-Let's compute empirical distributions of Betti at various n and p plot, in colour the probability that betti_1 is zero and against n and p scaled logarithmically on the two axes.
-We see two clear boundaries: when p is too low betti_1 is zero almost surely and likewise p is too high - in the middle there is a goldilocks region when betti_1 is almost surely positive.
+Here, we compute empirical distributions of Betti 1 and plot, in colour, the probability that Betti 1 is zero, against the log of n and p on the two axes.
+We see two clear boundaries: when p is too low Betti 1 is zero almost surely and likewise when p is too high.
+In the middle there is a goldilocks region when Betti 1 is almost surely positive.
 
+<!-- Talk about the two topological phenomena that are occurring at these boundaries -->
+
+<!-- Here we could talk about investigating trajectories -->

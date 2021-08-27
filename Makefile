@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := low
 
-SCENE = IntroScene
+SCENE = LargeDensities
 
 low:
 	manim -pql scene.py $(SCENE)

@@ -135,6 +135,24 @@ def getInitialGraph(directed=True, H0=1, W0=-1):
     return {"V": V, "E": E, "smplxs": smplxs}
 
 
+def getBigCycle():
+    V = [
+        Dot(2 * (LEFT + UP)),
+        Dot(2 * (RIGHT + UP)),
+        Dot(3 * RIGHT),
+        Dot(2 * (RIGHT + DOWN)),
+        Dot(2 * (LEFT + DOWN)),
+        Dot(3 * LEFT),
+    ]
+    flip = [True, True, False, True, False]
+    E = [
+        Arrow(V[i], V[i + 1]) if flip[i] else Arrow(V[i + 1], V[i]) for i in range(5)
+    ] + [Arrow(V[5], V[0])]
+    dirs = [UP, UP, RIGHT, DOWN, DOWN, LEFT]
+    labels = [MathTex(f"v_{i}").next_to(V[i], dirs[i]) for i in range(len(V))]
+    return {"V": V, "E": E, "labels": labels}
+
+
 class IntroScene(Scene):
     def construct(self):
         normal_graph = getInitialGraph(directed=False, H0=1, W0=-4)
@@ -573,9 +591,11 @@ class EmpiricalDist(Scene):
             start=(2.8 * UP + 3.1 * LEFT), end=(2.8 * UP + 2 * RIGHT), color=BLACK
         )
         l4 = Line(
+            start=(2.8 * UP + 3.1 * LEFT), end=(1.5 * UP + 2 * RIGHT), color=BLACK
+        )
+        l5 = Line(
             start=(2.8 * UP + 3.1 * LEFT), end=(3 * DOWN + 2 * RIGHT), color=BLACK
         )
-        l5 = copy.deepcopy(l3)
         pt1 = Dot(DOWN + LEFT, radius=0.1, color=RED)
         pt2 = Dot(2.9 * UP + RIGHT, radius=0.1, color=RED)
         pt3 = Dot(1.6 * UP + 0.6 * RIGHT, radius=0.1, color=RED)
@@ -595,3 +615,124 @@ class EmpiricalDist(Scene):
         self.wait(1)
         self.play(Transform(l3, l5))
         self.wait(3)
+
+
+class SmallDensities(Scene):
+    def construct(self):
+        bigCycle = getBigCycle()
+        prob_nocycle = (
+            MathTex(
+                r"&\mathbb{P}(\overrightarrow{\beta}_1(G)>0)\\",
+                r"&\quad\leq\mathbb{P}(\exists\text{ undirected cycle})\\",
+                r"&\quad\leq\sum_{L=2}^\infty \binom{n}{L}L! 2^L p^L",
+                r"\leq\frac{(2np)^2}{1-2np}",
+                r"\to 0",
+            )
+            .to_corner(UL)
+            .shift(DOWN + RIGHT)
+        )
+        p_condition = (
+            Tex(r"So long as $p=n^\alpha$, with $\alpha > -1$")
+            .next_to(prob_nocycle, DOWN)
+            .align_to(prob_nocycle, LEFT)
+        )
+        gradient_implication = (
+            Tex(r"$\therefore$ The gradient of the top boundary is $\geq -1$")
+            .next_to(p_condition, DOWN)
+            .align_to(p_condition, LEFT)
+        )
+        self.play(*[Create(v) for v in bigCycle["V"]])
+        for i in range(len(bigCycle["E"])):
+            self.play(Create(bigCycle["E"][i], run_time=0.5))
+        self.wait(1)
+        self.play(*[FadeOut(mob) for mob in self.mobjects])
+        for i in range(len(prob_nocycle)):
+            self.play(Write(prob_nocycle[i]))
+            self.wait(1)
+        self.play(Write(p_condition))
+        self.wait(1)
+        self.play(Write(gradient_implication))
+        self.wait(1)
+
+
+class LargeDensities(Scene):
+    def construct(self):
+        bigCycle = getBigCycle()
+        centre = Dot(ORIGIN)
+        centrep = Dot(5.255 * RIGHT + 3.25 * UP)
+        centre_edges = [
+            Arrow(bigCycle["V"][0], centre),
+            Arrow(centre, bigCycle["V"][2]),
+            Arrow(centre, bigCycle["V"][3]),
+        ]
+        centrep_edges = [
+            Arrow(bigCycle["V"][0], centrep).set_color(GREEN),
+            Arrow(centrep, bigCycle["V"][2]),
+            Arrow(centrep, bigCycle["V"][3]).set_color(GREEN),
+        ]
+        homologous_stmt = (
+            MathTex("v_0 v_1 + v_1 v_2 - v_3 v_2", r"\sim", r"v_0\kappa + \kappa v_3")
+            .set_color_by_tex("v_1", RED)
+            .set_color_by_tex("kappa", GREEN)
+        ).to_edge(DOWN)
+        homologous_stmtp = (
+            MathTex("v_0 v_1 + v_1 v_2 - v_3 v_2", r"\sim", r"v_0\kappa' + \kappa' v_3")
+            .set_color_by_tex("v_1", RED)
+            .set_color_by_tex("kappa", GREEN)
+        ).to_edge(DOWN)
+        kappa = MathTex(r"\kappa").next_to(centre, DOWN + LEFT)
+        kappap = MathTex(r"\kappa'").next_to(centrep, RIGHT)
+
+        prob_nodcentre = MathTex(
+            r"&\mathbb{P}(\overrightarrow{\beta}_1(G) > 0)\\",
+            r"&\quad\leq\mathbb{P}(\exists\text{ undirected 3-path without a directed centre})\\",
+            r"&\quad\leq 4n^4 p^3 e^{-p^3(n-4)}",
+            r"\to 0",
+        )
+        p_condition = (
+            Tex(r"So long as $p=n^\alpha$, with $\alpha < -1/3$")
+            .next_to(prob_nodcentre, DOWN)
+            .align_to(prob_nodcentre, LEFT)
+        )
+        gradient_implication = (
+            Tex(r"$\therefore$ The gradient of the top boundary is $\leq -1/3$")
+            .next_to(p_condition, DOWN)
+            .align_to(p_condition, LEFT)
+        )
+
+        self.play(
+            *[FadeIn(e) for e in bigCycle["V"] + bigCycle["E"] + bigCycle["labels"]],
+        )
+        self.wait(1)
+        self.play(Create(centre), Write(kappa))
+        self.wait(1)
+        self.play(*[Create(e) for e in centre_edges])
+        self.wait(1)
+        self.play(
+            *[
+                Transform(e, e.set_color(RED))
+                for e in [bigCycle["E"][i] for i in range(3)]
+            ]
+            + [
+                Transform(centre_edges[i], centre_edges[i].set_color(GREEN))
+                for i in [0, 2]
+            ],
+            Write(homologous_stmt),
+        )
+        self.wait(3)
+        self.play(
+            *[Transform(e1, e2) for e1, e2 in zip(centre_edges, centrep_edges)],
+            Transform(centre, centrep),
+            Transform(kappa, kappap),
+            Transform(homologous_stmt[2], homologous_stmtp[2]),
+        )
+        self.wait(1)
+        self.play(*[FadeOut(mob) for mob in self.mobjects])
+        self.wait(1)
+        for i in range(len(prob_nodcentre)):
+            self.play(Write(prob_nodcentre[i]))
+            self.wait(1)
+        self.play(Write(p_condition))
+        self.wait(1)
+        self.play(Write(gradient_implication))
+        self.wait(1)
