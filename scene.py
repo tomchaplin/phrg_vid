@@ -1,4 +1,5 @@
 from manim import *
+import copy
 
 CD_LEN = 4
 
@@ -550,3 +551,47 @@ class ERGraph(Scene):
         self.play(Write(prob, run_time=1))
         self.wait(1)
         self.play(*[FadeOut(mob, run_time=0.5) for mob in self.mobjects])
+
+
+class EmpiricalDist(Scene):
+    def construct(self):
+        im = ImageMobject("assets/prob_nonzero.png")
+        im.scale(0.3)
+        l1 = Line(
+            start=(1.5 * UP + 3.1 * LEFT),
+            end=(2 * RIGHT),
+            color=RED,
+            stroke_width=15,
+        ).set_opacity(0.9)
+        l2 = Line(
+            start=(3 * UP + 3.1 * LEFT),
+            end=(2 * RIGHT + 2.2 * UP),
+            color=RED,
+            stroke_width=15,
+        ).set_opacity(0.9)
+        l3 = Line(
+            start=(2.8 * UP + 3.1 * LEFT), end=(2.8 * UP + 2 * RIGHT), color=BLACK
+        )
+        l4 = Line(
+            start=(2.8 * UP + 3.1 * LEFT), end=(3 * DOWN + 2 * RIGHT), color=BLACK
+        )
+        l5 = copy.deepcopy(l3)
+        pt1 = Dot(DOWN + LEFT, radius=0.1, color=RED)
+        pt2 = Dot(2.9 * UP + RIGHT, radius=0.1, color=RED)
+        pt3 = Dot(1.6 * UP + 0.6 * RIGHT, radius=0.1, color=RED)
+        self.play(FadeIn(im), run_time=0.5)
+        self.play(Create(l1), Create(l2))
+        self.wait(2)
+        self.play(Create(pt1))
+        self.wait(3)
+        self.play(Transform(pt1, pt2))
+        self.wait(3)
+        self.play(Transform(pt1, pt3))
+        self.wait(3)
+        self.play(Uncreate(pt1))
+        self.play(Create(l3))
+        self.wait(1)
+        self.play(Transform(l3, l4))
+        self.wait(1)
+        self.play(Transform(l3, l5))
+        self.wait(3)
