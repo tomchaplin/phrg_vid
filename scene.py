@@ -30,11 +30,20 @@ def getRedArrowLeftOf(thingRight, label):
     return arr
 
 
-def getLongSquare():
-    a = Dot(DOWN * 3 + LEFT * 5)
-    b = Dot(DOWN * 2 + LEFT * 5)
-    c = Dot(DOWN * 3 + LEFT * 4)
-    d = Dot(DOWN * 2 + LEFT * 4)
+def getGrigoryanCite(paper="homology"):
+    if paper == "homology":
+        str = "(Grigor'yan et al. 2013) Homologies of path complexes and digraph"
+    elif paper == "homotopy":
+        str = "(Grigor'yan et al. 2014) Homotopy theory for digraphs"
+
+    return Text(str).scale(0.3).to_corner(DL)
+
+
+def getLongSquare(offset=0 * DOWN):
+    a = Dot(offset + DOWN * 2.5 + LEFT * 5)
+    b = Dot(offset + DOWN * 1.5 + LEFT * 5)
+    c = Dot(offset + DOWN * 2.5 + LEFT * 4)
+    d = Dot(offset + DOWN * 1.5 + LEFT * 4)
     a_label = MathTex("a").next_to(a, LEFT).scale(0.7)
     b_label = MathTex("b").next_to(b, LEFT).scale(0.7)
     c_label = MathTex("c").next_to(c, RIGHT).scale(0.7)
@@ -50,7 +59,7 @@ def getLongSquareProblem():
     return (
         MathTex(r"\partial(abd) = bd - ", r"ad", r" + ab")
         .set_color_by_tex("ad", RED)
-        .shift(DOWN * 2.5 + RIGHT)
+        .shift(DOWN * 2 + RIGHT)
     )
 
 
@@ -64,7 +73,7 @@ def getLongSquareSolution():
             r" + ac) \\ &= ab + bd - cd - ac",
         )
         .set_color_by_tex("{ad}", RED)
-        .shift(DOWN * 2.5 + RIGHT)
+        .shift(DOWN * 2 + RIGHT)
     )
 
 
@@ -197,6 +206,20 @@ class IntroScene(Scene):
             + [Uncreate(dflag_comp[2 * i + 1], run_time=0.5) for i in range(CD_LEN - 1)]
         )
         self.wait(1)
+        # Fade all out
+        self.play(
+            *[FadeOut(e, run_time=0.5) for e in dflag_comp]
+            + [
+                Uncreate(e, run_time=0.5)
+                for e in (
+                    normal_graph["V"] + normal_graph["E"] + normal_graph["smplxs"]
+                )
+            ]
+            + [
+                FadeOut(e, run_time=0.5)
+                for e in [dclique_example, dclique_def1, dclique_def2]
+            ]
+        )
 
 
 class GroupDef(Scene):
@@ -211,6 +234,7 @@ class GroupDef(Scene):
                 r"is an ordered tuple of $(p+1)$ vertices\\$v_0\dots v_p$",
             )
             .set_color_by_tex("elementary", PURPLE)
+            .scale(0.8)
             .next_to(graph_def, DOWN)
             .align_to(graph_def, LEFT)
         )
@@ -228,20 +252,31 @@ class GroupDef(Scene):
         not_allowed_eg = (
             Tex(r"$abdc$\\", r"is ", r"not", r" allowed")
             .set_color_by_tex("not", RED)
+            .scale(0.8)
             .next_to(allowed_path, DOWN)
             .align_to(allowed_path, LEFT)
             .shift(1.5 * DOWN + 2 * RIGHT)
         )
+        citation = getGrigoryanCite()
         square_graph = getSquareGraph()
         sg_green_edges = [0, 1]
         sg_red_edges = [3]
-        all_defs = MathTex(
-            r"\Lambda_p &:= \mathbb{Z}\langle\{\text{elementary }p\text{-paths}\}\rangle\\",
-            r"\mathcal{A}_p &:= \mathbb{Z}\langle\{\text{allowed }p\text{-paths}\}\rangle\\",
-            r"\partial_p(v_0 \dots v_p) &:= \sum_{i=0}^p (-1)^i v_0 \dots \hat{v_i} \dots v_p",
-        ).shift(2 * DOWN)
+        all_defs = (
+            MathTex(
+                r"\Lambda_p &:= \mathbb{Z}\langle\{\text{elementary }p\text{-paths}\}\rangle\\",
+                r"\mathcal{A}_p &:= \mathbb{Z}\langle\{\text{allowed }p\text{-paths}\}\rangle\\",
+                r"\partial_p(v_0 \dots v_p) &:= \sum_{i=0}^p (-1)^i v_0 \dots \hat{v_i} \dots v_p",
+            )
+            .shift(1.1 * DOWN)
+            .scale(0.8)
+        )
 
-        self.add(graph_def, elem_path, allowed_path)
+        self.play(
+            *[
+                FadeIn(e, run_time=0.5)
+                for e in [graph_def, elem_path, allowed_path, citation]
+            ]
+        )
         self.wait(5)
         self.play(*[Create(elem) for elem in square_graph["V"] + square_graph["E"]])
         self.wait(1)
@@ -261,12 +296,18 @@ class GroupDef(Scene):
         self.wait(3)
         self.play(
             *[
-                Uncreate(elem)
+                Uncreate(elem, run_time=0.5)
                 for elem in [not_allowed_eg] + square_graph["V"] + square_graph["E"]
             ]
         )
-        self.play(Write(all_defs))
+        self.play(FadeIn(all_defs))
         self.wait(5)
+        self.play(
+            *[
+                FadeOut(e, run_time=0.5)
+                for e in [all_defs, graph_def, elem_path, allowed_path]
+            ]
+        )
 
 
 class OmegaDef(Scene):
@@ -279,6 +320,7 @@ class OmegaDef(Scene):
             f"\\xrightarrow{{\\quad\\partial_{i+1}\\quad}}" for i in range(CD_LEN - 1)
         ]
 
+        citation = getGrigoryanCite()
         lambda_complex = chainComplexFactory(lambdas, boundaries)
         hooks = [getHookAbove(lambda_complex[2 * i]) for i in range(CD_LEN)]
         As_complex = (
@@ -316,9 +358,10 @@ class OmegaDef(Scene):
 
         Omega_def = MathTex(
             r"\Omega_p := \{v \in \mathcal{A}_p \ |\ \partial_p v \in \mathcal{A}_{p-1}\}"
-        ).shift(DOWN * 2.5)
+        ).shift(DOWN * 2)
 
         # Draw initial Lambda Complex
+        self.add(citation)
         self.play(Write(lambda_complex))
         self.wait()
         # Show allowed complex included
@@ -360,7 +403,7 @@ class OmegaDef(Scene):
             Transform(a2box, o1goodbox),
         )
         self.wait(5)
-        self.play(Uncreate(Omega_def))
+        self.play(FadeOut(Omega_def, run_time=0.5))
         # Example 1 fixed
         ls_group = getLongSquare()
         ls_problem = getLongSquareProblem()
@@ -392,3 +435,118 @@ class OmegaDef(Scene):
             + [Transform(As_complex[2 * i], Hom_complex[2 * i]) for i in range(CD_LEN)]
         )
         self.wait(1)
+        # Fade out hom groups
+        self.play(*[FadeOut(mob, run_time=0.5) for mob in self.mobjects])
+
+
+class Generators(Scene):
+    def construct(self):
+        citation = getGrigoryanCite(paper="homotopy")
+        first_two = (
+            MathTex(
+                r"\Omega_0 &= \mathbb{Z}\langle V \rangle\\",
+                r"\Omega_1 &= \mathbb{Z}\langle E \rangle",
+            )
+            .to_corner(UL)
+            .shift(DOWN + 0.5 * RIGHT)
+        )
+        omega_2 = MathTex("\Omega_2 = \mathbb{Z}\Bigg\langle").align_to(first_two, LEFT)
+        eyeglass = {}
+        eyeglass["V"] = [
+            Dot(3.7 * LEFT),
+            Dot(2.7 * LEFT),
+            Dot(1.7 * LEFT),
+        ]
+        eyeglass["E"] = [
+            e.scale(0.6)
+            for e in [
+                CurvedArrow(
+                    eyeglass["V"][0].get_center(),
+                    eyeglass["V"][1].get_center(),
+                ),
+                CurvedArrow(
+                    eyeglass["V"][1].get_center(),
+                    eyeglass["V"][0].get_center(),
+                ),
+                CurvedArrow(
+                    eyeglass["V"][1].get_center(),
+                    eyeglass["V"][2].get_center(),
+                ),
+                CurvedArrow(
+                    eyeglass["V"][2].get_center(),
+                    eyeglass["V"][1].get_center(),
+                ),
+            ]
+        ]
+        names = ["i", "j", "k"]
+        eyeglass["labels"] = [
+            MathTex(names[i]).next_to(eyeglass["V"][i], UP).scale(0.7) for i in range(3)
+        ]
+        eyeglass["element"] = (
+            MathTex("jij - jkj").next_to(eyeglass["V"][1], 1.2 * DOWN).scale(0.7)
+        )
+
+        triangle = {}
+        triangle["V"] = [Dot(0.2 * LEFT), Dot(0.55 * RIGHT + UP), Dot(1.3 * RIGHT)]
+        triangle["E"] = [
+            Arrow(start=triangle["V"][0], end=triangle["V"][1]),
+            Arrow(start=triangle["V"][0], end=triangle["V"][2]),
+            Arrow(start=triangle["V"][1], end=triangle["V"][2]),
+        ]
+        triangle["labels"] = [
+            MathTex(names[i]).next_to(triangle["V"][i], [LEFT, UP, RIGHT][i]).scale(0.7)
+            for i in range(3)
+        ]
+        triangle["element"] = MathTex("ijk").next_to(triangle["E"][1], DOWN).scale(0.7)
+        ls = getLongSquare(offset=8.7 * RIGHT + 2.5 * UP)
+        ls_label = MathTex("abd - acd").next_to(ls[5], DOWN).scale(0.7)
+
+        omega_2close = MathTex(r"\Bigg\rangle").next_to(omega_2, 40 * RIGHT)
+
+        self.play(Write(first_two), FadeIn(citation))
+        self.wait(1)
+        self.play(Write(omega_2))
+        for gen in [eyeglass, triangle]:
+            self.play(
+                *[
+                    Create(e)
+                    for e in gen["V"] + gen["E"] + gen["labels"] + [gen["element"]]
+                ]
+            )
+            self.wait(1)
+
+        self.play(*[Create(e) for e in ls + [ls_label, omega_2close]])
+        self.wait(5)
+        self.play(*[FadeOut(mob, run_time=0.5) for mob in self.mobjects])
+
+
+class ERGraph(Scene):
+    def construct(self):
+        V = [
+            Dot(DOWN + 2 * (LEFT + UP)),
+            Dot(DOWN + 2 * (RIGHT + UP)),
+            Dot(DOWN + 2 * (RIGHT + DOWN)),
+            Dot(DOWN + 2 * (LEFT + DOWN)),
+            Dot(DOWN + 3 * LEFT),
+            Dot(DOWN + 3 * RIGHT),
+        ]
+        arrows = [
+            Arrow(2 * (LEFT + DOWN) + DOWN, 3 * RIGHT + DOWN, color=MAROON_A),
+            Arrow(2 * (LEFT + UP) + DOWN, 2 * (LEFT + DOWN) + DOWN, color=MAROON_A),
+            Arrow(3 * LEFT + DOWN, 2 * (LEFT + UP) + DOWN, color=MAROON_A),
+            CurvedArrow(2 * (LEFT + UP) + DOWN, 3 * LEFT + DOWN, color=MAROON_A),
+        ]
+        name = MathTex(r"\overrightarrow{G}(n,p)").to_corner(UL)
+        nodes = Tex("$n$ nodes").next_to(name, DOWN).align_to(name, LEFT)
+        prob = (
+            Tex("Edges appear indepdently with probability $p$", color=MAROON_A)
+            .next_to(nodes, DOWN)
+            .align_to(nodes, LEFT)
+        )
+        self.play(FadeIn(name))
+        self.play(*[FadeIn(v) for v in V], Write(nodes))
+        for i in range(len(arrows)):
+            self.play(Create(arrows[i]), run_time=0.5)
+        self.play(Write(prob, run_time=1))
+        self.wait(1)
+        self.play(*[FadeOut(mob, run_time=0.5) for mob in self.mobjects])
