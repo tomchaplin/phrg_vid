@@ -736,3 +736,62 @@ class LargeDensities(Scene):
         self.wait(1)
         self.play(Write(gradient_implication))
         self.wait(1)
+
+
+class CycleReduction(Scene):
+    def construct(self):
+        bigCycle = getBigCycle()
+        extra_V = [Dot(RIGHT), Dot(DOWN), Dot(1.5 * LEFT + 0.5 * DOWN)]
+        extra_E = [
+            Arrow(bigCycle["V"][0], extra_V[0]),
+            Arrow(extra_V[0], bigCycle["V"][3]),
+            Arrow(bigCycle["V"][0], extra_V[1]),
+            Arrow(extra_V[1], bigCycle["V"][4]),
+            Arrow(bigCycle["V"][0], extra_V[2]),
+            Arrow(extra_V[2], bigCycle["V"][5]),
+        ]
+        centred_V = [Dot(2 * UP), Dot(DOWN + 2 * RIGHT), Dot(DOWN + 2 * LEFT)]
+        centred_E = [
+            Arrow(centred_V[0], centred_V[1]),
+            Arrow(centred_V[1], centred_V[2]),
+            Arrow(centred_V[2], centred_V[0]),
+        ]
+        final_V = [bigCycle["V"][0], extra_V[2], bigCycle["V"][5]]
+        final_E = [extra_E[4], extra_E[5], bigCycle["E"][5]]
+        nul_E = Arrow(ORIGIN, ORIGIN).scale(0)
+        hom0_V = Dot(ORIGIN)
+        hom0_E = [
+            DashedLine(hom0_V, centred_V[i]).scale(0.8).add_tip() for i in range(3)
+        ]
+        self.play(
+            *[FadeIn(e) for e in bigCycle["V"] + bigCycle["E"]],
+        )
+        self.wait(1)
+        self.play(*[FadeIn(extra_V[0])] + [FadeIn(extra_E[i]) for i in range(2)])
+        self.play(
+            *[FadeOut(bigCycle["E"][i]) for i in range(3)]κ
+            + [FadeOut(bigCycle["V"][i + 1]) for i in range(2)]
+        )
+        self.play(*[FadeIn(extra_E[i + 2]) for i in range(2)], FadeIn(extra_V[1]))
+        self.play(
+            FadeOut(bigCycle["V"][3]),
+            FadeOut(extra_V[0]),
+            FadeOut(bigCycle["E"][3]),
+            *[FadeOut(extra_E[i]) for i in range(2)],
+        )
+        self.play(*[FadeIn(extra_E[i + 4]) for i in range(2)], FadeIn(extra_V[2]))
+        self.play(
+            FadeOut(bigCycle["V"][4]),
+            FadeOut(extra_V[1]),
+            FadeOut(bigCycle["E"][4]),
+            *[FadeOut(extra_E[i + 2]) for i in range(2)],
+        )
+        self.play(
+            *[Transform(e1, e2) for e1, e2 in zip(final_E, centred_E)]
+            + [Transform(v1, v2) for v1, v2 in zip(final_V, centred_V)]
+        )
+        self.play(FadeIn(hom0_V), *[FadeIn(e) for e in hom0_E])
+        self.play(
+            *[Transform(e, nul_E) for e in hom0_E + final_E]
+            + [Transform(v, hom0_V) for v in final_V]
+        )

@@ -55,7 +55,29 @@ Our first question is when should we expect Betti 1 to be zero, and when should 
 Here, we compute empirical distributions of Betti 1 and plot, in colour, the probability that Betti 1 is zero, against the log of n and p on the two axes.
 We see two clear boundaries: when p is too low Betti 1 is zero almost surely and likewise when p is too high.
 In the middle there is a goldilocks region when Betti 1 is almost surely positive.
+Intuitively, as we cross the lower transition, it becomes likely that the kernel is non-empty.
+When we cross the second transition the kernel is still non-empty but they are sufficiently many 2-chains that all cycles are homologous to zero.
+In order to determine the gradient we are going to investigate straight line trajectories through this diagram.
 
-<!-- Talk about the two topological phenomena that are occurring at these boundaries -->
+## Lower Densities
 
-<!-- Here we could talk about investigating trajectories -->
+As with many traditional homologies, the kernel of the boundary operator has a basis of undirected cycles and hence the presence of such a cycle is a necessary for positive Betti 1.
+By an easy union bound we can bound the probability of there existing an undirected cycle.
+When `p=n^α` with `α<-1` this bound tends to 0.
+So as we follow such trajectories it becomes highly likely that Betti 1 is zero.
+
+## High Densities
+
+The story at high densities is slightly more complicated.
+One intuition is that, at high densities, any longer cycles are homologous to much smaller cycles which themselves are likely to be homologous to zero.
+Consider a vertex separate from the cycle with the following connected edges.
+It is quick to check that this subgraph has Betti 1 = 0 and hence the outer red path is homologous to the slightly shorter, green path.
+We call such a vertex a directed centre for the red path.
+Notice that the event that `κ` is a directed centre is independent from the event that `κ` prime is since they depend on disjoint edge sets.
+This is a useful property that lets us get our hands on a decent bound on the probability that there is a path __without__ a directed centre.
+The exponential term arise from a product over all possible directed centres.
+The power of `p` is `p^3` since a directed centre requires three connecting edges and this is multiplied `n-4` since this how many possible directed centres there are for a given 3-path.
+
+Directed centres let us reduce long cycles into smaller cycles.
+Then all that remains is to show that short cycles are trivial with high probability.
+
