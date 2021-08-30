@@ -650,9 +650,9 @@ class SmallDensities(Scene):
             self.play(Write(prob_nocycle[i]))
             self.wait(1)
         self.play(Write(p_condition))
-        #self.wait(1)
-        #self.play(Write(gradient_implication))
-        #self.wait(1)
+        # self.wait(1)
+        # self.play(Write(gradient_implication))
+        # self.wait(1)
 
 
 class LargeDensities(Scene):
@@ -768,7 +768,7 @@ class CycleReduction(Scene):
         self.wait(1)
         self.play(*[FadeIn(extra_V[0])] + [FadeIn(extra_E[i]) for i in range(2)])
         self.play(
-            *[FadeOut(bigCycle["E"][i]) for i in range(3)]κ
+            *[FadeOut(bigCycle["E"][i]) for i in range(3)]
             + [FadeOut(bigCycle["V"][i + 1]) for i in range(2)]
         )
         self.play(*[FadeIn(extra_E[i + 2]) for i in range(2)], FadeIn(extra_V[1]))
