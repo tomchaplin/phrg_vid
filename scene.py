@@ -707,6 +707,11 @@ class LargeDensities(Scene):
         self.wait(1)
         self.play(*[Create(e) for e in centre_edges])
         self.wait(1)
+        # Highlight subgraph by lowering opacity of other edges
+        self.play(*[e.animate.set_opacity(0.2) for e in bigCycle["E"][3:]])
+        self.wait(0.5)
+        self.play(*[e.animate.set_opacity(1) for e in bigCycle["E"][3:]])
+        self.wait(1)
         self.play(
             *[
                 Transform(e, e.set_color(RED))
@@ -730,7 +735,8 @@ class LargeDensities(Scene):
         self.wait(1)
         for i in range(len(prob_nodcentre)):
             self.play(Write(prob_nodcentre[i]))
-            self.wait(1)
+            if i != 0:
+                self.wait(1)
         self.play(Write(p_condition))
         # self.wait(1)
         # self.play(Write(gradient_implication))
