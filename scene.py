@@ -650,9 +650,9 @@ class SmallDensities(Scene):
             self.play(Write(prob_nocycle[i]))
             self.wait(1)
         self.play(Write(p_condition))
-        self.wait(1)
-        self.play(Write(gradient_implication))
-        self.wait(1)
+        #self.wait(1)
+        #self.play(Write(gradient_implication))
+        #self.wait(1)
 
 
 class LargeDensities(Scene):
@@ -684,8 +684,7 @@ class LargeDensities(Scene):
         kappap = MathTex(r"\kappa'").next_to(centrep, RIGHT)
 
         prob_nodcentre = MathTex(
-            r"&\mathbb{P}(\overrightarrow{\beta}_1(G) > 0)\\",
-            r"&\quad\leq\mathbb{P}(\exists\text{ undirected 3-path without a directed centre})\\",
+            r"&\mathbb{P}(\exists\text{ undirected 3-path without a directed centre})\\",
             r"&\quad\leq 4n^4 p^3 e^{-p^3(n-4)}",
             r"\to 0",
         )
@@ -733,9 +732,9 @@ class LargeDensities(Scene):
             self.play(Write(prob_nodcentre[i]))
             self.wait(1)
         self.play(Write(p_condition))
-        self.wait(1)
-        self.play(Write(gradient_implication))
-        self.wait(1)
+        # self.wait(1)
+        # self.play(Write(gradient_implication))
+        # self.wait(1)
 
 
 class CycleReduction(Scene):

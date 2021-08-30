@@ -69,15 +69,19 @@ So as we follow such trajectories it becomes highly likely that Betti 1 is zero.
 ## High Densities
 
 The story at high densities is slightly more complicated.
-One intuition is that, at high densities, any longer cycles are homologous to much smaller cycles which themselves are likely to be homologous to zero.
+One intuition is that, at high densities, any longer cycles are homologous to much smaller cycles, which themselves are likely to be homologous to zero.
 Consider a vertex separate from the cycle with the following connected edges.
 It is quick to check that this subgraph has Betti 1 = 0 and hence the outer red path is homologous to the slightly shorter, green path.
 We call such a vertex a directed centre for the red path.
-Notice that the event that `κ` is a directed centre is independent from the event that `κ` prime is since they depend on disjoint edge sets.
+Notice that the event that `κ` is a directed centre is independent from the event that `κ` prime is a centre, since they depend on disjoint edge sets.
 This is a useful property that lets us get our hands on a decent bound on the probability that there is a path __without__ a directed centre.
-The exponential term arise from a product over all possible directed centres.
-The power of `p` is `p^3` since a directed centre requires three connecting edges and this is multiplied `n-4` since this how many possible directed centres there are for a given 3-path.
+The exponential term arises from a product over all possible directed centres.
+The power of `p` is 3 since a directed centre requires three connecting edges and this is multiplied by the number of possible directed centres, `n-4`.
 
 Directed centres let us reduce long cycles into smaller cycles.
 Then all that remains is to show that short cycles are trivial with high probability.
+One way in which a 3-cycle could be trivial is if there is a centre vertex with connecting edges all pointing outwards.
+A quick union bound shows that the probability of there being a 3-cycle without such a vertex tends to 0 under the same assumption on `p`.
+
+## Boundary gradient implications
 
