@@ -4,6 +4,10 @@ import copy
 CD_LEN = 4
 
 
+def fadeOutAll(self, run_time=0.5):
+    return [FadeOut(mob, run_time=run_time) for mob in self.mobjects]
+
+
 def my_interlace(l1, l2):
     return list(sum(zip(l1, l2 + [0]), ())[:-1])
 
@@ -455,7 +459,7 @@ class OmegaDef(Scene):
         )
         self.wait(1)
         # Fade out hom groups
-        self.play(*[FadeOut(mob, run_time=0.5) for mob in self.mobjects])
+        self.play(*fadeOutAll(self))
 
 
 class Generators(Scene):
@@ -536,7 +540,7 @@ class Generators(Scene):
 
         self.play(*[Create(e) for e in ls + [ls_label, omega_2close]])
         self.wait(5)
-        self.play(*[FadeOut(mob, run_time=0.5) for mob in self.mobjects])
+        self.play(*fadeOutAll(self))
 
 
 class ERGraph(Scene):
@@ -568,7 +572,7 @@ class ERGraph(Scene):
             self.play(Create(arrows[i]), run_time=0.5)
         self.play(Write(prob, run_time=1))
         self.wait(1)
-        self.play(*[FadeOut(mob, run_time=0.5) for mob in self.mobjects])
+        self.play(*fadeOutAll(self))
 
 
 class EmpiricalDist(Scene):
@@ -615,6 +619,7 @@ class EmpiricalDist(Scene):
         self.wait(1)
         self.play(Transform(l3, l5))
         self.wait(3)
+        self.play(*fadeOutAll(self))
 
 
 class SmallDensities(Scene):
@@ -645,11 +650,13 @@ class SmallDensities(Scene):
         for i in range(len(bigCycle["E"])):
             self.play(Create(bigCycle["E"][i], run_time=0.5))
         self.wait(1)
-        self.play(*[FadeOut(mob) for mob in self.mobjects])
+        self.play(*fadeOutAll(self, run_time=1))
         for i in range(len(prob_nocycle)):
             self.play(Write(prob_nocycle[i]))
             self.wait(1)
         self.play(Write(p_condition))
+        self.wait(1)
+        self.play(*fadeOutAll(self))
         # self.wait(1)
         # self.play(Write(gradient_implication))
         # self.wait(1)
@@ -731,13 +738,15 @@ class LargeDensities(Scene):
             Transform(homologous_stmt[2], homologous_stmtp[2]),
         )
         self.wait(1)
-        self.play(*[FadeOut(mob) for mob in self.mobjects])
+        self.play(*fadeOutAll(self, run_time=1))
         self.wait(1)
         for i in range(len(prob_nodcentre)):
             self.play(Write(prob_nodcentre[i]))
             if i != 0:
                 self.wait(1)
         self.play(Write(p_condition))
+        self.wait(1)
+        self.play(*fadeOutAll(self))
         # self.wait(1)
         # self.play(Write(gradient_implication))
         # self.wait(1)
@@ -800,3 +809,5 @@ class CycleReduction(Scene):
             *[Transform(e, nul_E) for e in hom0_E + final_E]
             + [Transform(v, hom0_V) for v in final_V]
         )
+        self.wait(1)
+        self.play(*fadeOutAll(self))
