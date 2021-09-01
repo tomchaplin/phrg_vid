@@ -47,7 +47,7 @@ and `Ω_2` has three types of generators - eyeglasses, directed triangles and lo
 
 ## Random graphs
 
-Our aim is to understand how path homology the __first__ Betti number usually behaves.
+Our aim is to understand how the __first__ Betti number of path homology usually behaves.
 We study a simple null model `G(n, p)` in which the number of nodes is fixed at `n` and each directed edge appears independently with probability `p`.
 Our first question is when should we expect Betti 1 to be zero, and when should we expect it to be non-zero?
 

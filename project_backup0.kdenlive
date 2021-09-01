@@ -5,10 +5,6 @@
   <property name="length">660</property>
   <property name="eof">pause</property>
   <property name="resource">media/videos/scene/1080p60/CycleReduction.mp4</property>
-  <property name="audio_index">-1</property>
-  <property name="video_index">0</property>
-  <property name="mute_on_pause">0</property>
-  <property name="mlt_service">avformat-novalidate</property>
   <property name="meta.media.nb_streams">1</property>
   <property name="meta.media.0.stream.type">video</property>
   <property name="meta.media.0.stream.frame_rate">60</property>
@@ -22,7 +18,7 @@
   <property name="meta.media.0.codec.colorspace">709</property>
   <property name="meta.media.0.codec.name">h264</property>
   <property name="meta.media.0.codec.long_name">H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10</property>
-  <property name="meta.media.0.codec.bit_rate">167285</property>
+  <property name="meta.media.0.codec.bit_rate">183642</property>
   <property name="meta.attr.0.stream.handler_name.markup">VideoHandler</property>
   <property name="meta.attr.0.stream.vendor_id.markup">[0][0][0][0]</property>
   <property name="meta.attr.major_brand.markup">isom</property>
@@ -34,6 +30,10 @@
   <property name="meta.media.sample_aspect_num">1</property>
   <property name="meta.media.sample_aspect_den">1</property>
   <property name="aspect_ratio">1</property>
+  <property name="audio_index">-1</property>
+  <property name="video_index">0</property>
+  <property name="mute_on_pause">0</property>
+  <property name="mlt_service">avformat-novalidate</property>
   <property name="kdenlive:clipname"/>
   <property name="meta.media.frame_rate_num">60</property>
   <property name="meta.media.frame_rate_den">1</property>
@@ -46,18 +46,14 @@
   <property name="meta.media.top_field_first">0</property>
   <property name="meta.media.progressive">1</property>
   <property name="kdenlive:folderid">-1</property>
-  <property name="kdenlive:id">2</property>
-  <property name="kdenlive:file_size">271031</property>
-  <property name="kdenlive:file_hash">e896236d1c6d7de4a5425789f08087d8</property>
+  <property name="kdenlive:id">207</property>
+  <property name="kdenlive:file_size">261077</property>
+  <property name="kdenlive:file_hash">2ad909de8f707aa35839b486a927a91e</property>
  </producer>
  <producer id="producer1" in="00:00:00.000" out="00:00:24.483">
   <property name="length">1470</property>
   <property name="eof">pause</property>
   <property name="resource">media/videos/scene/1080p60/EmpiricalDist.mp4</property>
-  <property name="audio_index">-1</property>
-  <property name="video_index">0</property>
-  <property name="mute_on_pause">0</property>
-  <property name="mlt_service">avformat-novalidate</property>
   <property name="meta.media.nb_streams">1</property>
   <property name="meta.media.0.stream.type">video</property>
   <property name="meta.media.0.stream.frame_rate">60</property>
@@ -71,7 +67,7 @@
   <property name="meta.media.0.codec.colorspace">709</property>
   <property name="meta.media.0.codec.name">h264</property>
   <property name="meta.media.0.codec.long_name">H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10</property>
-  <property name="meta.media.0.codec.bit_rate">244188</property>
+  <property name="meta.media.0.codec.bit_rate">222464</property>
   <property name="meta.attr.0.stream.handler_name.markup">VideoHandler</property>
   <property name="meta.attr.0.stream.vendor_id.markup">[0][0][0][0]</property>
   <property name="meta.attr.major_brand.markup">isom</property>
@@ -83,6 +79,10 @@
   <property name="meta.media.sample_aspect_num">1</property>
   <property name="meta.media.sample_aspect_den">1</property>
   <property name="aspect_ratio">1</property>
+  <property name="audio_index">-1</property>
+  <property name="video_index">0</property>
+  <property name="mute_on_pause">0</property>
+  <property name="mlt_service">avformat-novalidate</property>
   <property name="kdenlive:clipname"/>
   <property name="kdenlive:folderid">-1</property>
   <property name="meta.media.frame_rate_num">60</property>
@@ -93,18 +93,14 @@
   <property name="meta.media.width">1920</property>
   <property name="meta.media.height">1080</property>
   <property name="meta.media.color_range">mpeg</property>
-  <property name="kdenlive:id">3</property>
-  <property name="kdenlive:file_size">781729</property>
-  <property name="kdenlive:file_hash">120973a9d8efee6b95e5ecf3c86cd7be</property>
+  <property name="kdenlive:id">208</property>
+  <property name="kdenlive:file_size">699621</property>
+  <property name="kdenlive:file_hash">eec804deede8e501f821deff88e05b84</property>
  </producer>
  <producer id="producer2" in="00:00:00.000" out="00:00:06.483">
   <property name="length">390</property>
   <property name="eof">pause</property>
   <property name="resource">media/videos/scene/1080p60/ERGraph.mp4</property>
-  <property name="audio_index">-1</property>
-  <property name="video_index">0</property>
-  <property name="mute_on_pause">0</property>
-  <property name="mlt_service">avformat-novalidate</property>
   <property name="meta.media.nb_streams">1</property>
   <property name="meta.media.0.stream.type">video</property>
   <property name="meta.media.0.stream.frame_rate">60</property>
@@ -130,6 +126,10 @@
   <property name="meta.media.sample_aspect_num">1</property>
   <property name="meta.media.sample_aspect_den">1</property>
   <property name="aspect_ratio">1</property>
+  <property name="audio_index">-1</property>
+  <property name="video_index">0</property>
+  <property name="mute_on_pause">0</property>
+  <property name="mlt_service">avformat-novalidate</property>
   <property name="kdenlive:clipname"/>
   <property name="kdenlive:file_size">195333</property>
   <property name="kdenlive:folderid">-1</property>
@@ -141,17 +141,13 @@
   <property name="meta.media.width">1920</property>
   <property name="meta.media.height">1080</property>
   <property name="meta.media.color_range">mpeg</property>
-  <property name="kdenlive:id">4</property>
+  <property name="kdenlive:id">209</property>
   <property name="kdenlive:file_hash">1256151ee317ead71b90c5043cb4d3e2</property>
  </producer>
  <producer id="producer3" in="00:00:00.000" out="00:00:13.483">
   <property name="length">810</property>
   <property name="eof">pause</property>
   <property name="resource">media/videos/scene/1080p60/Generators.mp4</property>
-  <property name="audio_index">-1</property>
-  <property name="video_index">0</property>
-  <property name="mute_on_pause">0</property>
-  <property name="mlt_service">avformat-novalidate</property>
   <property name="meta.media.nb_streams">1</property>
   <property name="meta.media.0.stream.type">video</property>
   <property name="meta.media.0.stream.frame_rate">60</property>
@@ -177,6 +173,10 @@
   <property name="meta.media.sample_aspect_num">1</property>
   <property name="meta.media.sample_aspect_den">1</property>
   <property name="aspect_ratio">1</property>
+  <property name="audio_index">-1</property>
+  <property name="video_index">0</property>
+  <property name="mute_on_pause">0</property>
+  <property name="mlt_service">avformat-novalidate</property>
   <property name="kdenlive:clipname"/>
   <property name="kdenlive:folderid">-1</property>
   <property name="meta.media.frame_rate_num">60</property>
@@ -187,7 +187,7 @@
   <property name="meta.media.width">1920</property>
   <property name="meta.media.height">1080</property>
   <property name="meta.media.color_range">mpeg</property>
-  <property name="kdenlive:id">5</property>
+  <property name="kdenlive:id">210</property>
   <property name="kdenlive:file_size">354659</property>
   <property name="kdenlive:file_hash">71d5647922001b7ddffb3ab15f31b2c9</property>
  </producer>
@@ -195,10 +195,6 @@
   <property name="length">1170</property>
   <property name="eof">pause</property>
   <property name="resource">media/videos/scene/1080p60/GroupDef.mp4</property>
-  <property name="audio_index">-1</property>
-  <property name="video_index">0</property>
-  <property name="mute_on_pause">0</property>
-  <property name="mlt_service">avformat-novalidate</property>
   <property name="meta.media.nb_streams">1</property>
   <property name="meta.media.0.stream.type">video</property>
   <property name="meta.media.0.stream.frame_rate">60</property>
@@ -224,6 +220,10 @@
   <property name="meta.media.sample_aspect_num">1</property>
   <property name="meta.media.sample_aspect_den">1</property>
   <property name="aspect_ratio">1</property>
+  <property name="audio_index">-1</property>
+  <property name="video_index">0</property>
+  <property name="mute_on_pause">0</property>
+  <property name="mlt_service">avformat-novalidate</property>
   <property name="kdenlive:clipname"/>
   <property name="kdenlive:folderid">-1</property>
   <property name="meta.media.frame_rate_num">60</property>
@@ -235,7 +235,7 @@
   <property name="meta.media.height">1080</property>
   <property name="meta.media.color_range">mpeg</property>
   <property name="kdenlive:file_size">843203</property>
-  <property name="kdenlive:id">6</property>
+  <property name="kdenlive:id">211</property>
   <property name="kdenlive:file_hash">c72b591d3a3de36629006aa84d372917</property>
   <property name="meta.media.top_field_first">0</property>
   <property name="meta.media.progressive">1</property>
@@ -244,10 +244,6 @@
   <property name="length">1290</property>
   <property name="eof">pause</property>
   <property name="resource">media/videos/scene/1080p60/IntroScene.mp4</property>
-  <property name="audio_index">-1</property>
-  <property name="video_index">0</property>
-  <property name="mute_on_pause">0</property>
-  <property name="mlt_service">avformat-novalidate</property>
   <property name="meta.media.nb_streams">1</property>
   <property name="meta.media.0.stream.type">video</property>
   <property name="meta.media.0.stream.frame_rate">60</property>
@@ -273,6 +269,10 @@
   <property name="meta.media.sample_aspect_num">1</property>
   <property name="meta.media.sample_aspect_den">1</property>
   <property name="aspect_ratio">1</property>
+  <property name="audio_index">-1</property>
+  <property name="video_index">0</property>
+  <property name="mute_on_pause">0</property>
+  <property name="mlt_service">avformat-novalidate</property>
   <property name="kdenlive:clipname"/>
   <property name="kdenlive:folderid">-1</property>
   <property name="meta.media.frame_rate_num">60</property>
@@ -284,7 +284,7 @@
   <property name="meta.media.height">1080</property>
   <property name="meta.media.color_range">mpeg</property>
   <property name="kdenlive:file_size">675029</property>
-  <property name="kdenlive:id">7</property>
+  <property name="kdenlive:id">212</property>
   <property name="kdenlive:file_hash">f4637e935c0de2d50053ef58c6b8f631</property>
   <property name="meta.media.top_field_first">0</property>
   <property name="meta.media.progressive">1</property>
@@ -293,10 +293,6 @@
   <property name="length">1650</property>
   <property name="eof">pause</property>
   <property name="resource">media/videos/scene/1080p60/LargeDensities.mp4</property>
-  <property name="audio_index">-1</property>
-  <property name="video_index">0</property>
-  <property name="mute_on_pause">0</property>
-  <property name="mlt_service">avformat-novalidate</property>
   <property name="meta.media.nb_streams">1</property>
   <property name="meta.media.0.stream.type">video</property>
   <property name="meta.media.0.stream.frame_rate">60</property>
@@ -310,7 +306,7 @@
   <property name="meta.media.0.codec.colorspace">709</property>
   <property name="meta.media.0.codec.name">h264</property>
   <property name="meta.media.0.codec.long_name">H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10</property>
-  <property name="meta.media.0.codec.bit_rate">201961</property>
+  <property name="meta.media.0.codec.bit_rate">198580</property>
   <property name="meta.attr.0.stream.handler_name.markup">VideoHandler</property>
   <property name="meta.attr.0.stream.vendor_id.markup">[0][0][0][0]</property>
   <property name="meta.attr.major_brand.markup">isom</property>
@@ -322,6 +318,10 @@
   <property name="meta.media.sample_aspect_num">1</property>
   <property name="meta.media.sample_aspect_den">1</property>
   <property name="aspect_ratio">1</property>
+  <property name="audio_index">-1</property>
+  <property name="video_index">0</property>
+  <property name="mute_on_pause">0</property>
+  <property name="mlt_service">avformat-novalidate</property>
   <property name="kdenlive:clipname"/>
   <property name="kdenlive:folderid">-1</property>
   <property name="meta.media.frame_rate_num">60</property>
@@ -332,18 +332,14 @@
   <property name="meta.media.width">1920</property>
   <property name="meta.media.height">1080</property>
   <property name="meta.media.color_range">mpeg</property>
-  <property name="kdenlive:id">8</property>
-  <property name="kdenlive:file_size">753644</property>
-  <property name="kdenlive:file_hash">7c8be2b48eb78c6b4e8683d30a457fe3</property>
+  <property name="kdenlive:id">213</property>
+  <property name="kdenlive:file_size">703074</property>
+  <property name="kdenlive:file_hash">fba1888ac370c7dbc28134708ebc4954</property>
  </producer>
  <producer id="producer7" in="00:00:00.000" out="00:00:59.983">
   <property name="length">3600</property>
   <property name="eof">pause</property>
   <property name="resource">media/videos/scene/1080p60/OmegaDef.mp4</property>
-  <property name="audio_index">-1</property>
-  <property name="video_index">0</property>
-  <property name="mute_on_pause">0</property>
-  <property name="mlt_service">avformat-novalidate</property>
   <property name="meta.media.nb_streams">1</property>
   <property name="meta.media.0.stream.type">video</property>
   <property name="meta.media.0.stream.frame_rate">60</property>
@@ -369,6 +365,10 @@
   <property name="meta.media.sample_aspect_num">1</property>
   <property name="meta.media.sample_aspect_den">1</property>
   <property name="aspect_ratio">1</property>
+  <property name="audio_index">-1</property>
+  <property name="video_index">0</property>
+  <property name="mute_on_pause">0</property>
+  <property name="mlt_service">avformat-novalidate</property>
   <property name="kdenlive:clipname"/>
   <property name="kdenlive:folderid">-1</property>
   <property name="meta.media.frame_rate_num">60</property>
@@ -379,7 +379,7 @@
   <property name="meta.media.width">1920</property>
   <property name="meta.media.height">1080</property>
   <property name="meta.media.color_range">mpeg</property>
-  <property name="kdenlive:id">9</property>
+  <property name="kdenlive:id">214</property>
   <property name="kdenlive:file_size">1672826</property>
   <property name="kdenlive:file_hash">fd4e70560d759d90bd01c7334c474dfa</property>
   <property name="meta.media.top_field_first">0</property>
@@ -389,10 +389,6 @@
   <property name="length">1200</property>
   <property name="eof">pause</property>
   <property name="resource">media/videos/scene/1080p60/SmallDensities.mp4</property>
-  <property name="audio_index">-1</property>
-  <property name="video_index">0</property>
-  <property name="mute_on_pause">0</property>
-  <property name="mlt_service">avformat-novalidate</property>
   <property name="meta.media.nb_streams">1</property>
   <property name="meta.media.0.stream.type">video</property>
   <property name="meta.media.0.stream.frame_rate">60</property>
@@ -406,7 +402,7 @@
   <property name="meta.media.0.codec.colorspace">709</property>
   <property name="meta.media.0.codec.name">h264</property>
   <property name="meta.media.0.codec.long_name">H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10</property>
-  <property name="meta.media.0.codec.bit_rate">175807</property>
+  <property name="meta.media.0.codec.bit_rate">165697</property>
   <property name="meta.attr.0.stream.handler_name.markup">VideoHandler</property>
   <property name="meta.attr.0.stream.vendor_id.markup">[0][0][0][0]</property>
   <property name="meta.attr.major_brand.markup">isom</property>
@@ -418,8 +414,12 @@
   <property name="meta.media.sample_aspect_num">1</property>
   <property name="meta.media.sample_aspect_den">1</property>
   <property name="aspect_ratio">1</property>
+  <property name="audio_index">-1</property>
+  <property name="video_index">0</property>
+  <property name="mute_on_pause">0</property>
+  <property name="mlt_service">avformat-novalidate</property>
   <property name="kdenlive:clipname"/>
-  <property name="kdenlive:file_size">488774</property>
+  <property name="kdenlive:file_size">429463</property>
   <property name="kdenlive:folderid">-1</property>
   <property name="meta.media.frame_rate_num">60</property>
   <property name="meta.media.frame_rate_den">1</property>
@@ -429,10 +429,10 @@
   <property name="meta.media.width">1920</property>
   <property name="meta.media.height">1080</property>
   <property name="meta.media.color_range">mpeg</property>
-  <property name="kdenlive:id">10</property>
+  <property name="kdenlive:id">215</property>
+  <property name="kdenlive:file_hash">f7a711f5c6324993ed538cc44362bb54</property>
   <property name="meta.media.top_field_first">0</property>
   <property name="meta.media.progressive">1</property>
-  <property name="kdenlive:file_hash">dca897c55d52ae34ff32a4630e3df867</property>
  </producer>
  <playlist id="main_bin">
   <property name="kdenlive:docproperties.activeTrack">2</property>
@@ -446,9 +446,6 @@
   <property name="kdenlive:docproperties.externalproxyparams">../Sub;;S03.MP4;../Clip;;.MXF</property>
   <property name="kdenlive:docproperties.generateimageproxy">0</property>
   <property name="kdenlive:docproperties.generateproxy">0</property>
-  <property name="kdenlive:docproperties.groups">[
-]
-</property>
   <property name="kdenlive:docproperties.kdenliveversion">21.08.0</property>
   <property name="kdenlive:docproperties.position">1123</property>
   <property name="kdenlive:docproperties.previewextension"/>
@@ -464,12 +461,15 @@
   <property name="kdenlive:docproperties.seekOffset">30000</property>
   <property name="kdenlive:docproperties.version">1.01</property>
   <property name="kdenlive:docproperties.verticalzoom">1</property>
-  <property name="kdenlive:docproperties.videoTarget">-1</property>
+  <property name="kdenlive:docproperties.videoTarget">2</property>
   <property name="kdenlive:docproperties.zonein">0</property>
   <property name="kdenlive:docproperties.zoneout">75</property>
   <property name="kdenlive:docproperties.zoom">8</property>
   <property name="kdenlive:expandedFolders"/>
   <property name="kdenlive:documentnotes"/>
+  <property name="kdenlive:docproperties.groups">[
+]
+</property>
   <property name="xml_retain">1</property>
   <entry producer="producer0" in="00:00:00.000" out="00:00:10.983"/>
   <entry producer="producer1" in="00:00:00.000" out="00:00:24.483"/>
@@ -573,7 +573,7 @@
   <property name="kdenlive:clipname"/>
   <property name="kdenlive:folderid">-1</property>
   <property name="kdenlive:file_size">675029</property>
-  <property name="kdenlive:id">7</property>
+  <property name="kdenlive:id">212</property>
   <property name="kdenlive:file_hash">f4637e935c0de2d50053ef58c6b8f631</property>
   <property name="xml">was here</property>
   <property name="meta.media.nb_streams">1</property>
@@ -614,7 +614,7 @@
  </producer>
  <playlist id="playlist4">
   <entry producer="producer9" in="00:00:00.000" out="00:00:21.483">
-   <property name="kdenlive:id">7</property>
+   <property name="kdenlive:id">212</property>
   </entry>
  </playlist>
  <playlist id="playlist5"/>
