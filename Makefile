@@ -1,6 +1,6 @@
-.DEFAULT_GOAL := low
+.DEFAULT_GOAL := high
 
-SCENE = CycleReduction
+SCENE = IntroScene
 
 low:
 	manim -pql scene.py $(SCENE)

@@ -182,29 +182,29 @@ class IntroScene(Scene):
         )
         # Draw undirected graph
         self.play(*[Create(elem) for elem in normal_graph["V"] + normal_graph["E"]])
-        self.wait(1)
+        self.wait(5)
         # Draw cliques as simplices
         self.bring_to_back(*normal_graph["smplxs"])
         self.play(*[Create(s) for s in normal_graph["smplxs"]], Write(clique_example))
-        self.wait(1)
+        self.wait(5)
         # Chain complex
-        self.play(*[Write(s) for s in clique_comp])
-        self.wait(1)
-        # Leads to homology
-        self.play(
-            *[Transform(clique_comp[2 * i], hom_comp[2 * i]) for i in range(CD_LEN)]
-            + [
-                Uncreate(clique_comp[2 * i + 1], run_time=0.5)
-                for i in range(CD_LEN - 1)
-            ]
-        )
-        self.wait(1)
+        # self.play(*[Write(s) for s in clique_comp])
+        # self.wait(1)
+        # # Leads to homology
+        # self.play(
+        #     *[Transform(clique_comp[2 * i], hom_comp[2 * i]) for i in range(CD_LEN)]
+        #     + [
+        #         Uncreate(clique_comp[2 * i + 1], run_time=0.5)
+        #         for i in range(CD_LEN - 1)
+        #     ]
+        # )
+        # self.wait(1)
         # Remove homology and simplices
-        self.play(
-            *[Uncreate(clique_comp[2 * i]) for i in range(CD_LEN)]
-            + [Uncreate(s) for s in normal_graph["smplxs"]]
-            + [Uncreate(clique_example)]
-        )
+        # self.play(
+        #     *[Uncreate(clique_comp[2 * i]) for i in range(CD_LEN)]
+        #     + [Uncreate(s) for s in normal_graph["smplxs"]]
+        #     + [Uncreate(clique_example)]
+        # )
         self.wait(1)
         # Make graph directed
         self.play(
