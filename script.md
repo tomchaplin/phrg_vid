@@ -104,3 +104,9 @@ A quick union bound shows that the probability of there being a 3-cycle without 
 
 ## Boundary gradient implications
 
+In conclusion, we have shown the bottom, low-density boundary has gradient greater than `-1`.
+The upper, high-density boundary has gradient less than `-1/3`.
+
+A second moment method can be used to determine trajectories which end up in the blue goldilocks region.
+In particular, these results imply that the upper boundary has gradient greater than `-2/3` and the lower boundary has gradient `-1`.
+Experiments indicate that the upper boundary has gradient `-2/3` but further theoretical work is required to confirm this.

@@ -200,11 +200,11 @@ class IntroScene(Scene):
         # )
         # self.wait(1)
         # Remove homology and simplices
-        # self.play(
-        #     *[Uncreate(clique_comp[2 * i]) for i in range(CD_LEN)]
-        #     + [Uncreate(s) for s in normal_graph["smplxs"]]
-        #     + [Uncreate(clique_example)]
-        # )
+        self.play(
+            *[Uncreate(s) for s in normal_graph["smplxs"]]
+            #   +[Uncreate(clique_comp[2 * i]) for i in range(CD_LEN)]
+            + [Uncreate(clique_example)]
+        )
         self.wait(1)
         # Make graph directed
         self.play(
@@ -395,29 +395,24 @@ class OmegaDef(Scene):
         self.wait(2)
         # Show problem with boundary in allowed complex
         self.play(Create(a2box))
-        self.wait()
         self.play(Transform(a2box, l2box))
-        self.wait()
         self.play(Transform(a2box, l1box))
-        self.wait()
         for i in range(2):
             self.play(Transform(a2box, a1boxbad), run_time=0.5)
             self.play(Transform(a2box, l1box), run_time=0.5)
         self.play(*[Write(As_complex[2 * i + 1]) for i in range(CD_LEN - 1)])
-        self.wait(2)
+        self.wait(1)
         # Example 1
         ls_group = getLongSquare()
         ls_problem = getLongSquareProblem()
-        self.play(*[Create(i) for i in ls_group])
+        self.play(*[Create(i) for i in ls_group], Write(ls_problem))
         self.wait(2)
-        self.play(Write(ls_problem))
-        self.wait(5)
         self.play(*[Uncreate(i) for i in ls_group + [ls_problem]])
         # Define Omega complex
         self.play(Write(Omega_def))
-        self.wait(5)
+        self.wait(1)
         self.play(Transform(As_complex, Omegas_complex_R))
-        self.wait(2)
+        self.wait(1)
         self.play(
             *[
                 Transform(As_complex[2 * i + 1], Omegas_complex_G[2 * i + 1])
@@ -425,16 +420,16 @@ class OmegaDef(Scene):
             ],
             Transform(a2box, o1goodbox),
         )
-        self.wait(5)
+        self.wait(1)
         self.play(FadeOut(Omega_def, run_time=0.5))
         # Example 1 fixed
         ls_group = getLongSquare()
         ls_problem = getLongSquareProblem()
         ls_sol = getLongSquareSolution()
         self.play(*[Create(i) for i in ls_group] + [Write(ls_problem)])
-        self.wait(2)
+        self.wait(1)
         self.play(Transform(ls_problem, ls_sol))
-        self.wait(5)
+        self.wait(1)
         # Centre Omega and delete everything else
         self.play(
             *[FadeOut(i) for i in ls_group + hooks],
@@ -527,7 +522,6 @@ class Generators(Scene):
         omega_2close = MathTex(r"\Bigg\rangle").next_to(omega_2, 40 * RIGHT)
 
         self.play(Write(first_two), FadeIn(citation))
-        self.wait(1)
         self.play(Write(omega_2))
         for gen in [eyeglass, triangle]:
             self.play(
@@ -536,7 +530,6 @@ class Generators(Scene):
                     for e in gen["V"] + gen["E"] + gen["labels"] + [gen["element"]]
                 ]
             )
-            self.wait(1)
 
         self.play(*[Create(e) for e in ls + [ls_label, omega_2close]])
         self.wait(5)
@@ -600,6 +593,7 @@ class EmpiricalDist(Scene):
         l5 = Line(
             start=(2.8 * UP + 3.1 * LEFT), end=(3 * DOWN + 2 * RIGHT), color=BLACK
         )
+        powerlaw = MathTex(r"p=n^\alpha").shift(5 * RIGHT)
         pt1 = Dot(DOWN + LEFT, radius=0.1, color=RED)
         pt2 = Dot(2.9 * UP + RIGHT, radius=0.1, color=RED)
         pt3 = Dot(1.6 * UP + 0.6 * RIGHT, radius=0.1, color=RED)
@@ -613,7 +607,7 @@ class EmpiricalDist(Scene):
         self.play(Transform(pt1, pt3))
         self.wait(3)
         self.play(Uncreate(pt1))
-        self.play(Create(l3))
+        self.play(Create(l3), Write(powerlaw))
         self.wait(1)
         self.play(Transform(l3, l4))
         self.wait(1)
@@ -637,7 +631,7 @@ class SmallDensities(Scene):
             .shift(DOWN + RIGHT)
         )
         p_condition = (
-            Tex(r"So long as $p=n^\alpha$, with $\alpha > -1$")
+            Tex(r"So long as $p=n^\alpha$, with $\alpha < -1$")
             .next_to(prob_nocycle, DOWN)
             .align_to(prob_nocycle, LEFT)
         )
@@ -651,11 +645,8 @@ class SmallDensities(Scene):
             self.play(Create(bigCycle["E"][i], run_time=0.5))
         self.wait(1)
         self.play(*fadeOutAll(self, run_time=1))
-        for i in range(len(prob_nocycle)):
-            self.play(Write(prob_nocycle[i]))
-            self.wait(1)
+        self.play(Write(prob_nocycle))
         self.play(Write(p_condition))
-        self.wait(1)
         self.play(*fadeOutAll(self))
         # self.wait(1)
         # self.play(Write(gradient_implication))
@@ -696,7 +687,7 @@ class LargeDensities(Scene):
             r"\to 0",
         )
         p_condition = (
-            Tex(r"So long as $p=n^\alpha$, with $\alpha < -1/3$")
+            Tex(r"So long as $p=n^\alpha$, with $\alpha > -1/3$")
             .next_to(prob_nodcentre, DOWN)
             .align_to(prob_nodcentre, LEFT)
         )
@@ -809,5 +800,54 @@ class CycleReduction(Scene):
             *[Transform(e, nul_E) for e in hom0_E + final_E]
             + [Transform(v, hom0_V) for v in final_V]
         )
+        self.wait(1)
+        self.play(*fadeOutAll(self))
+
+
+class QuickBound(Scene):
+    def construct(self):
+        prob_nodcentre = MathTex(
+            r"&\mathbb{P}(\exists\text{ non-trivial 3-cycle})\\",
+            r"&\quad\leq 2\binom{n}{3}p^3[1-p^3]^{2n-6}",
+            r"\to 0",
+        )
+        p_condition = (
+            Tex(r"So long as $p=n^\alpha$, with $\alpha > -1/3$")
+            .next_to(prob_nodcentre, DOWN)
+            .align_to(prob_nodcentre, LEFT)
+        )
+        for i in range(len(prob_nodcentre)):
+            self.play(Write(prob_nodcentre[i]))
+        self.play(Write(p_condition))
+        self.play(*fadeOutAll(self))
+
+
+class Conclusion(Scene):
+    def construct(self):
+        im = ImageMobject("assets/prob_nonzero.png")
+        im.scale(0.3).shift(2 * LEFT)
+        l1 = Line(
+            start=(1.5 * UP + 5.1 * LEFT),
+            end=(ORIGIN),
+            color=RED,
+            stroke_width=15,
+        ).set_opacity(0.9)
+        l2 = Line(
+            start=(3 * UP + 5.1 * LEFT),
+            end=(2.2 * UP),
+            color=RED,
+            stroke_width=15,
+        ).set_opacity(0.9)
+        powerlaw1 = MathTex(r"-2/3 \leq ", "m \leq -1/3").shift(4.3 * RIGHT + 2.2 * UP)
+        powerlaw2a = MathTex(r"m\geq -1").align_to(powerlaw1[1], LEFT)
+        powerlaw2b = MathTex(r"m= -1").shift(4.3 * RIGHT).align_to(powerlaw1[1], LEFT)
+        self.play(*[FadeIn(e, run_time=0.5) for e in [im, l1, l2]])
+        self.play(Write(powerlaw2a))
+        self.wait(1)
+        self.play(Write(powerlaw1[1]))
+        self.wait(1)
+        self.play(Write(powerlaw1[0]))
+        self.wait(1)
+        self.play(Transform(powerlaw2a, powerlaw2b))
         self.wait(1)
         self.play(*fadeOutAll(self))

@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := high
 
-SCENE = IntroScene
+SCENE = Conclusion
 
 low:
 	manim -pql scene.py $(SCENE)
